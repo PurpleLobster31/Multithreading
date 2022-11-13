@@ -1,6 +1,5 @@
 import threading
 from os import system, path
-import PyPDF2 as pydf
 from typing import NamedTuple
 
 from utils import ler_PDF, alimenta_dados
@@ -20,11 +19,11 @@ def busca_palavra(info:NamedTuple) -> None:
     global ocorrencias
     global lock
     for linha in info.linhas_para_ler:
-        num = linha.count(info.alvo)
-        if num > 0:
+        n_ocorrencias_linha = linha.count(info.alvo)
+        if n_ocorrencias_linha > 0:
             lock.acquire()
-            contador_palavra += num
-            ocorrencias.append({'Pagina':info.num_pag, 'Linha': linha})
+            contador_palavra += n_ocorrencias_linha 
+            ocorrencias.append({'pagina':info.num_pag, 'linha': linha, 'n_ocorrencias': n_ocorrencias_linha})
             lock.release()
 
 if __name__ == "__main__":
@@ -49,8 +48,7 @@ if __name__ == "__main__":
         
     print(f"Número de ocorrências do termo '{alvo}' no arquivo: {contador_palavra}")
     print("-"*30)
-    print("| Pg | Conteudo |")
+    print("| Pg | Conteudo | N de ocorrencias |")
     for item in ocorrencias:
-        print(f"| {item['Pagina']} | {item['Linha']} |")
+        print(f"| {item['pagina']} | {item['linha']} | {item['n_ocorrencias']} |")
 
-#TODO: joao fazer o README E O .PDF
