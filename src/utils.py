@@ -10,7 +10,7 @@ def ler_PDF(nome_arquivo:str) -> Tuple[List[List], int]:
     :return: tupla com todas_linhas (matriz de linhas do arquivo) e um inteiro que representa o número total de threads (2 threads por página)
   '''
   todas_linhas = []
-  leitor = pydf.PdfFileReader('./data/' + nome_arquivo)
+  leitor = pydf.PdfFileReader('data/' + nome_arquivo)
   for num_pagina in range(leitor.numPages):
       pagina = leitor.getPage(num_pagina)
       conteudo_pagina = pagina.extract_text()

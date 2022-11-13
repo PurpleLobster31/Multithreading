@@ -3,6 +3,7 @@ from os import system, path
 from typing import NamedTuple
 
 from utils import ler_PDF, alimenta_dados
+from interface import menu
 
 
 contador_palavra = 0
@@ -27,8 +28,10 @@ def busca_palavra(info:NamedTuple) -> None:
             lock.release()
 
 if __name__ == "__main__":
+    system('cls||clear')
+    menu()
     print('Digite o nome do arquivo que deseja ler: ')
-    arquivo = input()
+    arquivo = input() + '.pdf'
     
     system('cls||clear')
     print('Informe a palavra ou frase que deseja procurar: ')
