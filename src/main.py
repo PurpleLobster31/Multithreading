@@ -35,7 +35,7 @@ if __name__ == "__main__":
     
     system('cls||clear')
     print('Informe a palavra ou frase que deseja procurar: ')
-    alvo = input()
+    alvo = input().lower()
     
     linhas, num_threads = ler_PDF(arquivo)
     infos = alimenta_dados(alvo, linhas)

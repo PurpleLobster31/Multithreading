@@ -13,7 +13,7 @@ def ler_PDF(nome_arquivo:str) -> Tuple[List[List], int]:
   leitor = pydf.PdfFileReader('data/' + nome_arquivo)
   for num_pagina in range(leitor.numPages):
       pagina = leitor.getPage(num_pagina)
-      conteudo_pagina = pagina.extract_text()
+      conteudo_pagina = pagina.extract_text().lower()
       linhas_pag = conteudo_pagina.split('\n')
       todas_linhas.append(linhas_pag)
   return todas_linhas, leitor.numPages*2
