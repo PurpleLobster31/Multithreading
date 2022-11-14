@@ -3,7 +3,7 @@ from os import system, path
 from typing import NamedTuple
 
 from utils import ler_PDF, alimenta_dados
-from interface import menu
+from interface import menu, clear_screen
 
 
 contador_palavra = 0
@@ -28,17 +28,22 @@ def busca_palavra(info:NamedTuple) -> None:
             lock.release()
 
 if __name__ == "__main__":
-    system('cls||clear')
+    clear_screen()
     menu()
     print('Digite o nome do arquivo que deseja ler: ')
     arquivo = input() + '.pdf'
     
-    system('cls||clear')
+    clear_screen()
     print('Informe a palavra ou frase que deseja procurar: ')
     alvo = input().lower()
-    
-    linhas, num_threads = ler_PDF(arquivo)
-    infos = alimenta_dados(alvo, linhas)
+
+    try:
+        linhas, num_threads = ler_PDF(arquivo)
+        infos = alimenta_dados(alvo, linhas)
+    except FileNotFoundError:
+        clear_screen()
+        print(f'[ERRO] Não foi possível encontrar o arquivo: {arquivo}\nCertifique-se de que você adicionou o arquivo corretamente ou digitou o nome certo.')
+        exit(1)
     
     thread_list = []
     for item in infos:
